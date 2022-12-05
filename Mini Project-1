@@ -1,0 +1,58 @@
+"""Ahmed Khan (MOO910277)
+Following is my Mini Python Project covering SOB 28, SOB 29, And SOB 30"""
+import random  # To bring in the random number
+import time  # to manipulate the amount of time the code takes to execute
+
+number = random.randint(1, 100)  # pick the number between 1 and 100
+
+
+def intro():
+    print("May I ask you for your name?")
+    name = input()  # asks for name
+    print(name + ", we are going to play a game. I am thinking of a number between 1 and 100")
+    time.sleep(.5)
+    print("Go ahead. Guess!")
+
+
+def pick():
+    guessesTaken = 0
+    while guessesTaken < 6:  # if the number of guesses is less than 6
+        time.sleep(.25)
+        enter = input("Guess: ")  # inserts the place to enter guess
+        try:  # now we check if a number was entered
+            guess = int(enter)  # it will store the guess as an integer instead of a string
+
+            if guess <= 100 and guess >= 1:  # if they're in range
+                guessesTaken = guessesTaken + 1  # adds one guess each time the player is wrong
+                if guessesTaken < 6:
+                    if guess < number:
+                        print("The guess of the number that you have entered is too low")
+                    if guess > number:
+                        print("The guess of the number that you have entered is too high")
+                    if guess != number:
+                        time.sleep(.5)  # delay the execution by 0.5 seconds
+                        print("Try Again!")
+                if guess == number:
+                    break  # if the guess is right, then we will have to jump out of the while block
+            if guess > 100 or guess < 1:  # if they aren't in the range
+                print("Welp! That number isn't in the range!")
+                time.sleep(.25) # delay the execution by 0.25 seconds
+                print("Please enter a number between 1 and 100")
+
+        except:  # if a number wasn't entered
+            print("I don't think that " + enter + " is a number. Sorry")
+
+    if guess == number:
+        guessesTaken = str(guessesTaken)
+        print('Ah! ' + ' You guessed my number in ' + guessesTaken + ' guesses!')
+
+    if guess != number: # != signifies not equals to
+        print('Nope. The number I was thinking of was ' + str(number))
+
+
+playagain = "yes"
+while playagain == "yes" or playagain == "y" or playagain == "Yes":
+    intro()
+    pick()
+    print("Do you want to play again?")
+    playagain = input()
